@@ -1,10 +1,16 @@
 import React from 'react';
-import BlogHero from '@/components/BlogHero';
-import CodeSnippet from '@/components/CodeSnippet';
-import styles from './postSlug.module.css';
-import { loadBlogPost } from  '@/helpers/file-helpers';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+
+import { loadBlogPost } from  '@/helpers/file-helpers';
 import { BLOG_TITLE } from '@/constants';
+import COMPONENTS_MAP from '@/helpers/mdx-components';
+
+import BlogHero from '@/components/BlogHero';
+
+import styles from './postSlug.module.css';
+
+
+
 
 export async function generateMetadata({ params }) {
   const {frontmatter} = await loadBlogPost(params.postSlug);
@@ -26,9 +32,7 @@ async function BlogPost({ params }) {
       <div className={styles.page}>
        <MDXRemote 
           source={content}
-          components={{
-            pre: CodeSnippet,
-          }}
+          components={COMPONENTS_MAP}
        />
       </div>
     </article>
